@@ -1,10 +1,10 @@
-const { VK } = require('vk-io');
+const { VK, Keyboard } = require("vk-io");
 const db = require("./db.json");
 
 const vk = new VK({
 	token: process.env.TOKEN
 });
-updates.use(async (context, next) => {
+vk.updates.use(async (context, next) => {
 
     if (context.is("message") && context.isOutbox){
         return;
