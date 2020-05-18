@@ -31,7 +31,25 @@ vk.updates.hear(/начать/i, context => (
 
 Заработай 1р за каждого реферала 💸
 	
-Повышай уровень в разделе "Прогресс", чтобы зарабатывать еще больше`)
-));
+Повышай уровень в разделе "Прогресс", чтобы зарабатывать еще больше`), {
+	keyboard:
+	Keyboard.keyboard([
+			[
+					Keyboard.textButton({
+							label: '🔥 Прогресс',
+							color: Keyboard.PRIMARY_COLOR
+					}),
+					Keyboard.textButton({
+							label: '🏡 Профиль',
+							color: Keyboard.PRIMARY_COLOR
+					}),
+					Keyboard.textButton({
+							label: 'ℹ️ Справка',
+							color: Keyboard.PRIMARY_COLOR
+					}),
+			]])
+})
+
+);
 
 vk.updates.start().catch(console.error);
