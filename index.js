@@ -25,8 +25,8 @@ vk.updates.use(async (context, next) => {
         await next();
     } catch (err) { console.error(err) }
 });
-vk.updates.hear(/начать/i, context => (
-	context.send(
+vk.updates.hear(/начать/i, async (context) => (
+	await context.send(
 `Здравствуй!
 
 Заработай 1р за каждого реферала 💸
