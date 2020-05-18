@@ -1,7 +1,7 @@
 const { VK } = require('vk-io');
 
 const vk = new VK({
-	token: 'TOKEN'
+	token: process.env.TOKEN
 });
 
 vk.updates.hear(/hello/i, context => (
