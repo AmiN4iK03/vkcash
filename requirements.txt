@@ -1,1 +1,1 @@
-vk-io
+vk-io.js
