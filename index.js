@@ -1,23 +1,23 @@
 const { VK, Keyboard } = require("vk-io");
 //const db = require("./db.json");
 const { connect, model } = require('mongoose');
-connect('mongodb+srv://dbuser:161491a@cluster0-hb3c1.mongodb.net/test?retryWrites=true&w=majority');
+connect('mongodb://dbuser:161491a@cluster0-shard-00-00-hb3c1.mongodb.net:27017,cluster0-shard-00-01-hb3c1.mongodb.net:27017,cluster0-shard-00-02-hb3c1.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
 
 const vk = new VK({
 	token: 'ddaf745cabae36fc51dab5569f4cad9d7ac2f862aba7ab8f5a0db88f4dfb3a89844618bb6d825b8102968'
+});
+const User = model('User', {
+	id: Number,
+	bal: Number,
+	ref: Number,
+	refed: Number
 });
 vk.updates.use(async (context, next) => {
 
     if (context.is("message") && context.isOutbox){
         return;
 	}
-	const User = model('User', {
-		id: Number,
-		bal: Number,
-		ref: Number,
-		refed: Number
-	});
-	let user = await user.findOne({ id: context.senderId });
+	let user = await User.findOne({ id: context.senderId });
 
 	if(!user) {
 		let $user = new User({
@@ -85,6 +85,8 @@ vk.updates.hear(/прогресс/i, async (context) => (
 );
 
 vk.updates.hear(/профиль/i, async (context) => {
+	let user = await User.findOne({ id: context.senderId });
+
 	await context.send(
 `0 УРОВЕНЬ.
 
@@ -118,19 +120,24 @@ vk.updates.hear(/справка/i, async (context) => {
 );
 
 vk.updates.hear(/реф ([0-9]+)/i, async (context) => {
-	if(!db[context.$match[1]]) {
+	let user = await User.findOne({ id: context.senderId });
+	let target = await User.findOne({ id: context.$match[1] });
+
+	if(!target) {
 		return context.send('Такого реферального кода нет');
 	}
 	else if(context.$match[1] == context.senderId) {
 		return context.send('Нельзя вводить свой реферальный код');
 	}
-	else if(context.user.refed == 1) {
+	else if(user.refed == 1) {
 		return context.send('Вы уже вводили реферальный код');
 	}
-	user.set('refed', 1);
-	user.inc('bal', 1);
-	User.findOne({ id: Number($match[1]) }).inc('ref', 1);
-	User.findOne({ id: Number($match[1]) }).inc('bal', 1);
+	user.refed = 1;
+	user.bal += 1;
+	target.ref += 1;
+	target.bal += 1;
+	user.save();
+	target.save();
 	await context.send(
 `Вы получили +1р за введёный код`)
     await vk.api.messages.send({
@@ -147,7 +154,7 @@ async function run() {
 
 run().catch(console.error);
 
-setInterval(() => {
-let db = require("./db.json");
-require("fs").writeFileSync("./db.json", JSON.stringify(db, null, "\t"));
-}, 2000);
+// setInterval(() => {
+// let db = require("./db.json");
+// require("fs").writeFileSync("./db.json", JSON.stringify(db, null, "\t"));
+// }, 2000);
