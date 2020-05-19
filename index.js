@@ -17,7 +17,7 @@ vk.updates.use(async (context, next) => {
 		ref: Number,
 		refed: Number
 	});
-	user = await user.findOne({ id: context.senderId });
+	let user = await user.findOne({ id: context.senderId });
 
 	if(!user) {
 		let $user = new User({
