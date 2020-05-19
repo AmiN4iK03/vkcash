@@ -71,7 +71,7 @@ vk.updates.hear(/прогресс/i, async (context) => (
 `[Уровень 0]
 
 Сейчас вам доступно: 
-+1р за каждого реферала.
++1р за каждого реферала
 
 Получи 1 уровень, чтобы открыть способность:
 +17.5р за реферала
@@ -101,8 +101,13 @@ vk.updates.hear(/профиль/i, async (context) => {
 );
 
 vk.updates.hear(/вывод/i, async (context) => {
+	let user = await User.findOne({ id: context.senderId });
+
+	if(user.bal < 20) {
+		return context.send(`Вывод доступен от 20р`);
+	}
 	await context.send(
-`Вывод доступен от 20р`)}
+`Вывод станет доступен после проверки вашего аккаунта на нарушение правил проекта`)}
 
 );
 
@@ -138,7 +143,7 @@ vk.updates.hear(/реф ([0-9]+)/i, async (context) => {
 	user.save();
 	target.save();
 	await context.send(
-`Вы получили +1р за введёный код`)
+`Вы получили +1р за введенный код`)
     await vk.api.messages.send({
 	    user_ids: context.$match[1],
 	    message: `Вы получили +1р за нового реферала`
