@@ -1,5 +1,4 @@
 const { VK, Keyboard } = require("vk-io");
-//const db = require("./db.json");
 const { connect, model } = require('mongoose');
 connect('mongodb://dbuser:161491a@cluster0-shard-00-00-hb3c1.mongodb.net:27017,cluster0-shard-00-01-hb3c1.mongodb.net:27017,cluster0-shard-00-02-hb3c1.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
 
@@ -153,8 +152,3 @@ async function run() {
 }
 
 run().catch(console.error);
-
-// setInterval(() => {
-// let db = require("./db.json");
-// require("fs").writeFileSync("./db.json", JSON.stringify(db, null, "\t"));
-// }, 2000);
