@@ -1,6 +1,6 @@
 const { VK, Keyboard } = require("vk-io");
 const { connect, model } = require('mongoose');
-connect(URI);
+connect(process.env.URI);
 
 const vk = new VK({
 	token: process.env.TOKEN
