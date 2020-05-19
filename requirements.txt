@@ -1,2 +1,2 @@
-vk-io
-ip
+vk-io.js
+ip.js
