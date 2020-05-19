@@ -1,24 +1,34 @@
 const { VK, Keyboard } = require("vk-io");
-const db = require("./db.json");
+//const db = require("./db.json");
+const { connect, model } = require('mongoose');
+connect('mongodb+srv://dbuser:161491a@cluster0-hb3c1.mongodb.net/test?retryWrites=true&w=majority');
 
 const vk = new VK({
-	token: process.env.TOKEN
+	token: 'ddaf745cabae36fc51dab5569f4cad9d7ac2f862aba7ab8f5a0db88f4dfb3a89844618bb6d825b8102968'
 });
 vk.updates.use(async (context, next) => {
 
     if (context.is("message") && context.isOutbox){
         return;
-    }
+	}
+	const User = model('User', {
+		id: Number,
+		bal: Number,
+		ref: Number,
+		refed: Number
+	});
+	user = await user.findOne({ id: context.senderId });
 
-    if (!db[context.senderId]) {
-        db[context.senderId] = {
+	if(!user) {
+		let $user = new User({
+			id: context.senderId,
 			bal: 0,
 			ref: 0,
 			refed: 0
-        };
-    }
+		});
 
-    context.user = db[context.senderId];
+		await $user.save();
+	}
 
     try {
         await next();
@@ -78,9 +88,9 @@ vk.updates.hear(/профиль/i, async (context) => {
 	await context.send(
 `0 УРОВЕНЬ.
 
-Баланс: ${context.user.bal}р
+Баланс: ${user.bal}р
 
-Рефералы: ${context.user.ref}
+Рефералы: ${user.ref}
 
 Зарабатывай, просто приглашая друзей
 Тот кого Вы пригласили должен ввести: реф ${context.senderId}
@@ -117,10 +127,10 @@ vk.updates.hear(/реф ([0-9]+)/i, async (context) => {
 	else if(context.user.refed == 1) {
 		return context.send('Вы уже вводили реферальный код');
 	}
-	context.user.refed = 1;
-	context.user.bal += 1;
-	db[context.$match[1]].ref += 1;
-	db[context.$match[1]].bal += 1;
+	user.set('refed', 1);
+	user.inc('bal', 1);
+	User.findOne({ id: Number($match[1]) }).inc('ref', 1);
+	User.findOne({ id: Number($match[1]) }).inc('bal', 1);
 	await context.send(
 `Вы получили +1р за введёный код`)
     await vk.api.messages.send({
