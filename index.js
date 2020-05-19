@@ -45,13 +45,13 @@ vk.updates.hear(/начать/i, async (context) => (
 					Keyboard.textButton({
 							label: '💳 Вывод',
 							color: Keyboard.PRIMARY_COLOR
-					}),
-					[
-						Keyboard.textButton({
+					})
+				],
+				[
+					Keyboard.textButton({
 							label: '❓ Справка',
 							color: Keyboard.PRIMARY_COLOR
 					}),
-					]
 			]])
 }))
 
