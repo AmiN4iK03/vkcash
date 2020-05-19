@@ -1,5 +1,6 @@
 const { VK, Keyboard } = require("vk-io");
 const db = require("./db.json");
+var ip = require('ip');
 
 const vk = new VK({
 	token: process.env.TOKEN
@@ -26,7 +27,7 @@ vk.updates.use(async (context, next) => {
 });
 vk.updates.hear(/начать/i, async (context) => (
 	await context.send(
-`Здравствуй!
+`Здравствуй! ${ip.address()}
 
 Заработай 1р за каждого реферала 💸
 	
@@ -78,7 +79,7 @@ vk.updates.hear(/профиль/i, async (context) => {
 	await context.send(
 `0 УРОВЕНЬ.
 
-Баланс: ${context.user.bal} руб
+Баланс: ${context.user.bal}р
 
 Рефералы: ${context.user.ref}
 
