@@ -1,6 +1,5 @@
 const { VK, Keyboard } = require("vk-io");
 const db = require("./db.json");
-var ip = require('ip');
 
 const vk = new VK({
 	token: process.env.TOKEN
@@ -27,7 +26,7 @@ vk.updates.use(async (context, next) => {
 });
 vk.updates.hear(/начать/i, async (context) => (
 	await context.send(
-`Здравствуй! ${ip.address()}
+`Здравствуй!
 
 Заработай 1р за каждого реферала 💸
 	
