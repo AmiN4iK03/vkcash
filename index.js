@@ -1,3 +1,8 @@
+const http = require('http');
+const server = http.createServer();
+console.log('runned');
+server.listen(3000);
+
 const { VK, Keyboard } = require("vk-io");
 const { connect, model } = require('mongoose');
 connect(process.env.URI);
