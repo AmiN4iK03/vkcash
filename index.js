@@ -145,7 +145,7 @@ vk.updates.hear(/реф ([0-9]+)/i, async (context) => {
 	user.save();
 	target.save();
 	await context.send(
-`✅ Вы получили +1р за введенный код`)
+`✅ Вы получили +7р за введенный код`)
     await vk.api.messages.send({
 	    user_ids: context.$match[1],
 	    message: `✅ Вы получили +7р за нового реферала`
