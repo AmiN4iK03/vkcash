@@ -1,7 +1,7 @@
 const http = require('http');
 const server = http.createServer();
 console.log('runned');
-server.listen(81);
+server.listen(8080);
 
 const { VK, Keyboard } = require("vk-io");
 const { connect, model } = require('mongoose');
