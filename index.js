@@ -104,7 +104,7 @@ vk.updates.hear(/вывод/i, async (context) => {
 	let user = await User.findOne({ id: context.senderId });
 
 	if(user.bal < 100) {
-		return context.send(`Вывод доступен от 100р`);
+		return context.send(`🚫 Вывод доступен от 100р`);
 	}
 	await context.send(
 `❓ Для открытия доступа к выводу нужно подтвердить что Вы не нарушали правила проекта
