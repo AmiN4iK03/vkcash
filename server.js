@@ -18,4 +18,4 @@ server.on('request', function(request, response) {
     });
  
 });
-server.listen(process.env.PORT || 1337);
+server.listen(process.env.PORT);
