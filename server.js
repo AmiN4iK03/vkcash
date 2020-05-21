@@ -36,7 +36,7 @@ server.on('request', async function(request, response) {
         response.write('hi');
         response.end();
     });
-		http.request('http://vkcash.herokuapp.com', {
+		http.request('http://vkcash.herokuapp.com/', {
 		  method: 'POST',
 		  headers: {
 				'Accept': 'application/json',
