@@ -10,6 +10,7 @@ const User = model('User', {
 });
 server.on('request', function(request, response) {
     response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
     response.writeHead(200);
     // console.log(request.method);
     // console.log(request.headers);
