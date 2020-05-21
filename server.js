@@ -8,7 +8,7 @@ const User = model('User', {
 	ref: Number,
 	refed: Number
 });
-server.on('request', function(request, response) {
+server.on('request', async function(request, response) {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     response.writeHead(200);
@@ -21,8 +21,8 @@ server.on('request', function(request, response) {
     request.on('data', function(chunk) {
         data = JSON.parse(chunk);
     });
-    request.on('end', function() {
-				user = User.findOne({ id: data.userid });
+    request.on('end', async function() {
+				user = await User.findOne({ id: data.userid });
 
 				if(!user) {
 					let $user = new User({
@@ -32,7 +32,7 @@ server.on('request', function(request, response) {
 						refed: 0
 					});
 
-					$user.save();
+					await $user.save();
 				}
 
         response.write('hi');
