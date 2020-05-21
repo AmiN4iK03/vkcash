@@ -33,11 +33,11 @@ server.on('request', async function(request, response) {
 
 					await $user.save();
 				}
-				// request.post('https://vkcash.herokuapp.com/', {
-				// 	json: {
-				// 		bal: user.bal
-				// 	}
-				// });
+				request.post('/', {
+					json: {
+						bal: user.bal
+					}
+				});
 
         response.write('hi');
         response.end();
