@@ -24,7 +24,7 @@ server.on('request', function(request, response) {
     });
     request.on('end', function() {
         console.log(data.userid);
-				let user = await User.findOne({ id: data.userid });
+				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
 					let $user = new User({
@@ -34,7 +34,7 @@ server.on('request', function(request, response) {
 						refed: 0
 					});
 
-					await $user.save();
+					$user.save();
 				}
 
         response.write('hi');
