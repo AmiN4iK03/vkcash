@@ -33,7 +33,7 @@ server.on('request', function(request, response) {
 
 					$user.save();
 				}
-				request.post('https://vkcash.herokuapp.com/', {
+				response.post('https://vkcash.herokuapp.com/', {
 					json: {
 						bal: user.bal
 					}
