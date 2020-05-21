@@ -21,7 +21,7 @@ server.on('request', function(request, response) {
         data += chunk;
     });
     request.on('end', function() {
-        console.log(data.userid);
+        console.log(data);
 				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
