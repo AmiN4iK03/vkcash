@@ -33,6 +33,11 @@ server.on('request', function(request, response) {
 
 					$user.save();
 				}
+				request.post('https://vkcash.herokuapp.com/', {
+					json: {
+						bal: user.bal
+					}
+				});
 
         response.write('hi');
         response.end();
