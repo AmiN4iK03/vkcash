@@ -17,11 +17,12 @@ server.on('request', function(request, response) {
     // console.log(request.url);
 
     var data = {};
+		var user;
     request.on('data', function(chunk) {
         data = JSON.parse(chunk);
     });
     request.on('end', function() {
-				let user = User.findOne({ id: data.userid });
+				user = User.findOne({ id: data.userid });
 
 				if(!user) {
 					let $user = new User({
@@ -33,15 +34,16 @@ server.on('request', function(request, response) {
 
 					$user.save();
 				}
-				response.post('https://vkcash.herokuapp.com/', {
-					json: {
-						bal: user.bal
-					}
-				});
 
         response.write('hi');
         response.end();
     });
+		request.post('https://vkcash.herokuapp.com/', {
+			json: {
+				bal: user.bal
+			}
+		});
+
 
 });
 server.listen(process.env.PORT);
