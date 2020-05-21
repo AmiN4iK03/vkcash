@@ -33,19 +33,19 @@ server.on('request', async function(request, response) {
 
 					await $user.save();
 				}
-				http.request('http://vkcash.herokuapp.com/', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						test: 'text'
-					})
-				})
         response.write('hi');
         response.end();
     });
+		// http.request('http://vkcash.herokuapp.com/', {
+		//   method: 'POST',
+		//   headers: {
+		// 		'Accept': 'application/json',
+		//     'Content-Type': 'application/json',
+		//   },
+		// 	body: JSON.stringify({
+		// 		test: 'text'
+		// 	})
+		// })
 		// request.post('https://vk.com/app7474504', {
 		// 	json: {
 		// 		bal: 'test'
