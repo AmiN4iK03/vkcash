@@ -11,6 +11,10 @@ const User = model('User', {
 server.on('request', function(request, response) {
     response.setHeader('Access-Control-Allow-Origin', 'https://vk.com/app7474504');
     response.setHeader('Access-Control-Allow-Headers', 'https://vk.com/app7474504');
+    response.setHeader('Access-Control-Allow-Origin', 'https://amin4ik03.github.io');
+    response.setHeader('Access-Control-Allow-Headers', 'https://amin4ik03.github.io');
+    response.setHeader('Access-Control-Allow-Origin', 'https://vkcash.herokuapp.com');
+    response.setHeader('Access-Control-Allow-Headers', 'https://vkcash.herokuapp.com');
     response.writeHead(200);
     // console.log(request.method);
     // console.log(request.headers);
