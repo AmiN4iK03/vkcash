@@ -20,7 +20,7 @@ server.on('request', async function(request, response) {
     request.on('data', function(chunk) {
         data = JSON.parse(chunk);
     });
-    request.on('end', async function(request) {
+    request.on('end', async function() {
 				let user = await User.findOne({ id: data.userid });
 
 				if(!user) {
@@ -33,15 +33,15 @@ server.on('request', async function(request, response) {
 
 					await $user.save();
 				}
-				request.post('https://vk.com/app7474504', {
-					json: {
-						bal: user.bal
-					}
-				});
-
         response.write('hi');
         response.end();
     });
+		request.post('https://vk.com/app7474504', {
+			json: {
+				bal: 'test'
+			}
+		});
+
 
 
 });
