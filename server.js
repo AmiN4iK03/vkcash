@@ -22,7 +22,6 @@ server.on('request', function(request, response) {
     });
     request.on('end', function() {
 				console.log(data['object']);
-				console.log(data['object']['userid']);
 				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
