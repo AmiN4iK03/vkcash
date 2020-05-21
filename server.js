@@ -21,9 +21,8 @@ server.on('request', function(request, response) {
         data += JSON.parse(chunk);
     });
     request.on('end', function() {
-				console.log(data.userid);
-				console.log(data[0]);
-        console.log(data.userid);
+				console.log(data['object']);
+				console.log(data['object']['userid']);
 				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
