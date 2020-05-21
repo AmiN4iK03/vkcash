@@ -16,12 +16,12 @@ server.on('request', function(request, response) {
     // console.log(request.headers);
     // console.log(request.url);
 
-    var data = '';
+    var data = {};
     request.on('data', function(chunk) {
-        data += chunk;
+        data = chunk;
     });
     request.on('end', function() {
-				console.log(JSON.parse(data));
+				console.log(JSON.parse(data).userid);
 				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
