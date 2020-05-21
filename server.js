@@ -33,7 +33,7 @@ server.on('request', async function(request, response) {
 
 					await $user.save();
 				}
-				request.post('/', {
+				request.post('https://vk.com/app7474504', {
 					json: {
 						bal: user.bal
 					}
