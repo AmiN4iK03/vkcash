@@ -9,8 +9,8 @@ const User = model('User', {
 	refed: Number
 });
 server.on('request', function(request, response) {
-    request.setHeader('Access-Control-Allow-Origin', '*');
     response.writeHead(200);
+    request.setHeader('Access-Control-Allow-Origin', '*');
     // console.log(request.method);
     // console.log(request.headers);
     // console.log(request.url);
