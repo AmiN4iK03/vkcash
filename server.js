@@ -15,7 +15,7 @@ server.on('request', function(request, response) {
     // console.log(request.method);
     // console.log(request.headers);
     // console.log(request.url);
- 
+
     var data = '';
     request.on('data', function(chunk) {
         //let user = await User.findOne({ id: context.senderId });
@@ -23,10 +23,23 @@ server.on('request', function(request, response) {
         data += chunk.toString();
     });
     request.on('end', function() {
-        console.log(data);
+        console.log(data.userid);
+				let user = await User.findOne({ id: data.userid });
+
+				if(!user) {
+					let $user = new User({
+						id: data.userid,
+						bal: 0,
+						ref: 0,
+						refed: 0
+					});
+
+					await $user.save();
+				}
+
         response.write('hi');
         response.end();
     });
- 
+
 });
 server.listen(process.env.PORT);
