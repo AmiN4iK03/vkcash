@@ -9,8 +9,8 @@ const User = model('User', {
 	refed: Number
 });
 server.on('request', function(request, response) {
-    response.setHeader('Access-Control-Allow-Origin', 'vkcash.herokuapp.com');
-    response.setHeader('Access-Control-Allow-Headers', 'vkcash.herokuapp.com');
+    response.setHeader('Access-Control-Allow-Origin', 'https://amin4ik03.github.io');
+    response.setHeader('Access-Control-Allow-Headers', 'https://amin4ik03.github.io');
     response.writeHead(200);
     // console.log(request.method);
     // console.log(request.headers);
