@@ -36,22 +36,16 @@ server.on('request', async function(request, response) {
         response.write('hi');
         response.end();
     });
-		try {
-			http.request({
-				hostname: 'vkcash.herokuapp.com',
-				port: 80,
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					test: 'text'
-				})
+		http.request('https://vkcash.herokuapp.com', {
+		  method: 'POST',
+		  headers: {
+				'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		  },
+			body: JSON.stringify({
+				test: 'text'
 			})
-		} catch (e) {
-			console.log(e);
-		}
+		})
 		// request.post('https://vk.com/app7474504', {
 		// 	json: {
 		// 		bal: 'test'
