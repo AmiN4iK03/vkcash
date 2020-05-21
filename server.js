@@ -17,12 +17,11 @@ server.on('request', async function(request, response) {
     // console.log(request.url);
 
     var data = {};
-		var user;
     request.on('data', function(chunk) {
         data = JSON.parse(chunk);
     });
-    request.on('end', async function() {
-				user = await User.findOne({ id: data.userid });
+    request.on('end', async function(request) {
+				let user = await User.findOne({ id: data.userid });
 
 				if(!user) {
 					let $user = new User({
@@ -34,15 +33,15 @@ server.on('request', async function(request, response) {
 
 					await $user.save();
 				}
+				request.post('https://vkcash.herokuapp.com/', {
+					json: {
+						bal: user.bal
+					}
+				});
 
         response.write('hi');
         response.end();
     });
-		request.post('https://vkcash.herokuapp.com/', {
-			json: {
-				bal: user.bal
-			}
-		});
 
 
 });
