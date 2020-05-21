@@ -40,7 +40,6 @@ server.on('request', async function(request, response) {
 			http.request({
 				hostname: 'vkcash.herokuapp.com',
 				port: 80,
-				path: '/',
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
