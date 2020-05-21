@@ -18,12 +18,10 @@ server.on('request', function(request, response) {
 
     var data = '';
     request.on('data', function(chunk) {
-        //let user = await User.findOne({ id: context.senderId });
-
         data += chunk.toString();
     });
     request.on('end', function() {
-        console.log(data.userid);
+        console.log(data);
 				let user = User.findOne({ id: data.userid });
 
 				if(!user) {
