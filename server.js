@@ -18,10 +18,10 @@ server.on('request', function(request, response) {
 
     var data = '';
     request.on('data', function(chunk) {
-        data += chunk;
+        data += JSON.parse(chunk);
     });
     request.on('end', function() {
-				console.log(JSON.parse(data)['userid']);
+				console.log(data['userid']);
 				console.log(data[0]);
         console.log(data.userid);
 				let user = User.findOne({ id: data.userid });
