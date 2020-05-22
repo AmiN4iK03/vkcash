@@ -8,8 +8,7 @@ const User = model('User', {
 	ref: Number,
 	refed: Number
 });
-app.use(function (res) {
-	express.json();
+app.use(express.json(), function (res) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', '*');
 });
