@@ -10,7 +10,8 @@ const User = model('User', {
 });
 
 app.post('/', function (req, res) {
-  console.log(req);
+	console.log('Got body:', req.body);
+	res.sendStatus(200);
 });
 app.listen(process.env.PORT);
 
