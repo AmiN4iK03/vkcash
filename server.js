@@ -28,9 +28,7 @@ app.post('/', async function (req, res) {
 		await $user.save();
 	}
 	console.log(user.bal);
-	res.send(JSON.stringify({
-		test: 'text'
-	}));
+	res.json({test: 'text'});
 });
 app.listen(process.env.PORT);
 
