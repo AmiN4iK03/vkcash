@@ -10,8 +10,8 @@ const User = model('User', {
 });
 app.use(function (res) {
 	express.json();
-	res.set('Access-Control-Allow-Origin', '*');
-	res.set('Access-Control-Allow-Headers', '*');
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', '*');
 });
 
 app.post('/', async function (req, res) {
