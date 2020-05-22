@@ -10,8 +10,22 @@ const User = model('User', {
 });
 app.use(express.json());
 
-app.post('/', function (req, res) {
-	console.log('Got body:', req.body.key);
+app.post('/', async function (req, res) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', '*');
+
+	let user = await User.findOne({ id: req.body.userid });
+	if(!user) {
+		let $user = new User({
+			id: req.body.userid,
+			bal: 0,
+			ref: 0,
+			refed: 0
+		});
+
+		await $user.save();
+	}
+	console.log(user.bal);
 	res.sendStatus(200);
 });
 app.listen(process.env.PORT);
