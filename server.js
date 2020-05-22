@@ -8,24 +8,25 @@ const User = model('User', {
 	ref: Number,
 	refed: Number
 });
-app.use(express.json(), function (res) {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', '*');
+app.use(function (res) {
+	express.json();
+	res.set('Access-Control-Allow-Origin', '*');
+	res.set('Access-Control-Allow-Headers', '*');
 });
 
 app.post('/', async function (req, res) {
-	let user = await User.findOne({ id: req.body.userid });
-	if(!user) {
-		let $user = new User({
-			id: req.body.userid,
-			bal: 0,
-			ref: 0,
-			refed: 0
-		});
-
-		await $user.save();
-	}
-	console.log(user.bal);
+	// let user = await User.findOne({ id: req.body.userid });
+	// if(!user) {
+	// 	let $user = new User({
+	// 		id: req.body.userid,
+	// 		bal: 0,
+	// 		ref: 0,
+	// 		refed: 0
+	// 	});
+	//
+	// 	await $user.save();
+	// }
+	console.log(req.body);
 	res.sendStatus(200);
 });
 app.listen(process.env.PORT);
