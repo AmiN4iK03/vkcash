@@ -29,7 +29,7 @@ app.post('/', async function (req, res) {
 	}
 	console.log(user.bal);
 	res.sendStatus(200);
-	res.send({test: 'text'});
+	await res.send({test: 'text'});
 });
 app.listen(process.env.PORT);
 
