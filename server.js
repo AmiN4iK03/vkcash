@@ -9,10 +9,10 @@ const User = model('User', {
 	refed: Number
 });
 app.use(express.json());
-app.use(async function (req, res, next) {
+app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', '*');
-	await next();
+	next();
 });
 
 app.post('/', async function (req, res) {
@@ -28,7 +28,6 @@ app.post('/', async function (req, res) {
 		await $user.save();
 	}
 	console.log(user.bal);
-	res.sendStatus(200);
 	res.send({test: 'text'});
 });
 app.listen(process.env.PORT);
