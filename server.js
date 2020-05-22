@@ -28,8 +28,8 @@ app.post('/', async function (req, res) {
 		await $user.save();
 	}
 	console.log(user.bal);
-	res.send({test: 'text'});
 	res.sendStatus(200);
+	res.send({test: 'text'});
 });
 app.listen(process.env.PORT);
 
