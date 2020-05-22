@@ -10,7 +10,6 @@ const User = model('User', {
 });
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.multipart());
 
 app.post('/', function (req, res) {
 	console.log('Got body:', req.body);
