@@ -10,7 +10,7 @@ const User = model('User', {
 });
 
 app.post('/', function (req, res) {
-  console.log('Hello World!');
+  console.log(res);
 });
 app.listen(process.env.PORT);
 
