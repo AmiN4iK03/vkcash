@@ -9,10 +9,9 @@ const User = model('User', {
 	refed: Number
 });
 app.use(express.json());
-app.use(express.urlencoded());
 
 app.post('/', function (req, res) {
-	console.log('Got body:', req.body);
+	console.log('Got body:', req.body.key);
 	res.sendStatus(200);
 });
 app.listen(process.env.PORT);
