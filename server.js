@@ -8,12 +8,14 @@ const User = model('User', {
 	ref: Number,
 	refed: Number
 });
-app.use(express.json());
-
-app.post('/', async function (req, res) {
+app.use(function (res, next) {
+	express.json();
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', '*');
+	next();
+});
 
+app.post('/', async function (req, res) {
 	let user = await User.findOne({ id: req.body.userid });
 	if(!user) {
 		let $user = new User({
